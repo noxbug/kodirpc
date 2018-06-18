@@ -10,7 +10,7 @@ The example below shows how to use the library.
 ```python
 import kodirpc as kodi
 
-kodi.connection.new('localhost')
+kodi.connection.connect('localhost')
 
 kodi.player.play_pause()
 kodi.input.home()

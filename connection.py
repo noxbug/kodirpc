@@ -7,7 +7,7 @@ global host
 global port
 
 
-def new(host_='localhost', port_=8080):
+def connect(host_='localhost', port_=8080):
     global host
     global port
 
