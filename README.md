@@ -4,4 +4,13 @@ It is bo no means complete, but is written to be easily extendable.
 The RPC module performs most of the heavy lifting. 
 The kodirpc library uses a separate module for every namespace in Kodi JSON-RPC API. 
 This maskes it possible to call methods using the python dot notation. 
-Look at example.py to see how to use the library.
+
+## Usage
+The example below shows how to use the library
+`import kodirpc as kodi
+
+kodi.connect('localhost')
+
+kodi.player.play_pause()
+kodi.input.home()
+kodi.library.update()e`
