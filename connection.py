@@ -1,8 +1,8 @@
+# this file contains the connection details
 from . import nowplaying as _nowplaying
 from . import rpc as _rpc
 
 
-# this file contains the connection details
 global host
 global port
 
