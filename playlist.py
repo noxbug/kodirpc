@@ -29,7 +29,7 @@ def get_items():
         playlists = get_playlists()
         # iterate over all playlists
         for playlist in playlists:
-            items = _rpc.request('Playlist.GetItems',{'playlistid': playlist['playlistid']})
+            items = _rpc.request('Playlist.GetItems', {'playlistid': playlist['playlistid']})
             # check if playlist is empty
             if 'items' in items:
                 # append playlist type
