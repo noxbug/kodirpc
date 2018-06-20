@@ -123,3 +123,11 @@ def fast_rewind():
     except:
         _nowplaying.reset()
         return {}
+
+
+def next_subtitle():
+    try:
+        player = get_active_player()
+        _rpc.request('Player.SetSubtitle', {'playerid': player['playerid'], 'subtitle': 'next', 'enable': True})
+    except:
+        pass
