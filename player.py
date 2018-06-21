@@ -95,6 +95,15 @@ def go_to_previous():
         pass
 
 
+def go_to_playlist_position(position):
+    try:
+        player = get_active_player()
+        _rpc.request('Player.GoTo', {'playerid': player['playerid'], 'to': position})
+        _nowplaying.update()
+    except:
+        pass
+
+
 def fast_forward():
     try:
         player = get_active_player()
