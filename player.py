@@ -1,5 +1,6 @@
 from . import connection as _connection
 from . import nowplaying as _nowplaying
+from . import properties as _properties
 from . import rpc as _rpc
 
 def get_active_player():
@@ -17,15 +18,8 @@ def get_item():
     try:
         # get active playerid + content type
         player = get_active_player()
-        # select which properties
-        if player['type'] == 'audio':
-            properties = ['title', 'artist', 'album', 'duration','thumbnail', 'file', 'fanart']
-        elif player['type'] == 'video':
-            properties = ['title', 'season', 'episode', 'duration', 'showtitle', 'tvshowid', 'thumbnail', 'file', 'fanart']
-        else:
-            properties = ['title', 'album', 'artist', 'season', 'episode', 'duration', 'showtitle', 'tvshowid', 'thumbnail', 'file', 'fanart', 'streamdetails']
         # get properties
-        item = _rpc.request('Player.GetItem', {'playerid': player['playerid'], 'properties': properties})
+        item = _rpc.request('Player.GetItem', {'playerid': player['playerid'], 'properties': _properties.select()})
         return item['item']
     except:
         print('WARNING: Could not get item')
