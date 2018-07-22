@@ -36,7 +36,7 @@ def get_items():
                 # append playlist type
                 items['type'] = playlist['type']
                 # return statement breaks loops
-                return items
+                return items['items']
         # all playlist empty, return empty dict
         return {}
     except:

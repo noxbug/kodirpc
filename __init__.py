@@ -6,3 +6,4 @@ from . import library
 from . import gui
 from . import nowplaying
 from . import playlist
+from . import audiolibrary
