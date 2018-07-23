@@ -9,11 +9,11 @@ import time
 global title
 global artist
 global album
-global albumart
+global album_art
 global play
 global position
-global currenttime
-global totaltime
+global current_time
+global total_time
 global active
 
 
@@ -54,17 +54,17 @@ def reset():
     global title
     global artist
     global album
-    global albumart
+    global album_art
     global play
     global position
-    global currenttime
-    global totaltime
+    global current_time
+    global total_time
     global active
 
     title = ''
     artist = ''
     album = ''
-    albumart = ''
+    album_art = ''
     play = False
     position = 0
     active = False  # used to show/hide mini player
@@ -75,21 +75,21 @@ def update():
     global title
     global artist
     global album
-    global albumart
+    global album_art
     global play
     global position
-    global currenttime
-    global totaltime
+    global current_time
+    global total_time
     global active
 
     item = player.get_item()
     try:
         title = item['title']
-        albumart = player.get_album_art_url()
+        album_art = player.get_album_art_url()
         pos = player.get_position()
         position = pos['percentage']
-        currenttime = _dict_to_datetime(pos['time'])
-        totaltime = _dict_to_datetime(pos['totaltime'])
+        current_time = _dict_to_datetime(pos['time'])
+        total_time = _dict_to_datetime(pos['totaltime'])
         play = bool(pos['speed'])
         active = True
 
@@ -120,15 +120,15 @@ def smart_update_service():
     global title
     global artist
     global album
-    global albumart
+    global album_art
     global play
     global position
-    global currenttime
-    global totaltime
+    global current_time
+    global total_time
     global active
 
     # calculate expected end time + 3sec margin
-    endtime = _deltatime_to_seconds( _datetime_to_deltatime(totaltime) - _datetime_to_deltatime(currenttime) + datetime.timedelta(seconds=3) )
+    endtime = _deltatime_to_seconds(_datetime_to_deltatime(total_time) - _datetime_to_deltatime(current_time) + datetime.timedelta(seconds=3))
 
     global scheduler
     global update_event

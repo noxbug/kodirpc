@@ -15,7 +15,6 @@ def scan():
     _rpc.request('AudioLibrary.Scan')
 
 
-
 def get_artists():
     """
     Retrieve all artists. For backward compatibility by default
@@ -23,16 +22,39 @@ def get_artists():
     other roles, however absolutely all artists can be returned
     using allroles=true
     """
-    artists = _rpc.request('AudioLibrary.GetArtists')
-    return artists['artists']
+    try:
+        artists = _rpc.request('AudioLibrary.GetArtists')
+        return artists['artists']
+    except:
+        return {}
 
 
-def get_albums(artistid=None):
+def get_albums(**kwargs):
     """
     Retrieve all albums from specified artist (and role) or that has songs of the specified genre
     """
-    if artistid:
-        albums = _rpc.request('AudioLibrary.GetAlbums',{'filter': {'artistid': artistid}})
-    else:
-        albums = _rpc.request('AudioLibrary.GetAlbums')
-    return albums['albums']
+    try:
+        if 'artist_id' in kwargs:
+            albums = _rpc.request('AudioLibrary.GetAlbums', {'filter': {'artistid': kwargs['artist_id']}})
+        elif 'artist' in kwargs:
+            albums = _rpc.request('AudioLibrary.GetAlbums', {'filter': {'artist': kwargs['artist']}})
+        else:
+            albums = _rpc.request('AudioLibrary.GetAlbums')
+        return albums['albums']
+    except:
+        return {}
+
+
+def get_songs(**kwargs):
+    try:
+        if 'artist_id' in kwargs:
+            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {'artistid': kwargs['artist_id']}})
+        elif 'artist' in kwargs:
+            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {'artist': kwargs['artist']}})
+        elif 'album_id' in kwargs:
+            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {'album_id': kwargs['album_id']}})
+        else:
+            songs = _rpc.request('AudioLibrary.GetSongs')
+        return songs['songs']
+    except:
+        return {}
