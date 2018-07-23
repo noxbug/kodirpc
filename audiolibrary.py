@@ -32,12 +32,16 @@ def get_artists():
 def get_albums(**kwargs):
     """
     Retrieve all albums from specified artist (and role) or that has songs of the specified genre
+    Possible keys:
+    * artist
+    * artistid
+    * ...
     """
     try:
-        if 'artist_id' in kwargs:
-            albums = _rpc.request('AudioLibrary.GetAlbums', {'filter': {'artistid': kwargs['artist_id']}})
-        elif 'artist' in kwargs:
-            albums = _rpc.request('AudioLibrary.GetAlbums', {'filter': {'artist': kwargs['artist']}})
+        if kwargs:
+            # select first key in kwargs
+            key = list(kwargs.keys())[0]
+            albums = _rpc.request('AudioLibrary.GetAlbums', {'filter': {key: kwargs[key]}})
         else:
             albums = _rpc.request('AudioLibrary.GetAlbums')
         return albums['albums']
@@ -46,13 +50,19 @@ def get_albums(**kwargs):
 
 
 def get_songs(**kwargs):
+    """
+    Retrieve all songs from specified album, artist or genre
+    Possible keys:
+    * artist
+    * artistid
+    * albumid
+    * ...
+    """
     try:
-        if 'artist_id' in kwargs:
-            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {'artistid': kwargs['artist_id']}})
-        elif 'artist' in kwargs:
-            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {'artist': kwargs['artist']}})
-        elif 'album_id' in kwargs:
-            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {'album_id': kwargs['album_id']}})
+        if kwargs:
+            # select first key in kwargs
+            key = list(kwargs.keys())[0]
+            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {key: kwargs['key']}})
         else:
             songs = _rpc.request('AudioLibrary.GetSongs')
         return songs['songs']
