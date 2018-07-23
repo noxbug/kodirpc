@@ -62,7 +62,7 @@ def get_songs(**kwargs):
         if kwargs:
             # select first key in kwargs
             key = list(kwargs.keys())[0]
-            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {key: kwargs['key']}})
+            songs = _rpc.request('AudioLibrary.GetSongs', {'filter': {key: kwargs[key]}})
         else:
             songs = _rpc.request('AudioLibrary.GetSongs')
         return songs['songs']
